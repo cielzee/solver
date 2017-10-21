@@ -1,0 +1,25 @@
+.listing-post {
+  margin: 16px 0;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.listing-title {
+  font-weight: bold;
+  color: #f44336;
+  display: inline-block;
+  padding: 0 8px;
+}
+
+.listing-thumbnail {
+  display: inline-block;
+}
+
+.listing-comment {
+  margin: 8px;
+}
+
+
+h2, h3, p {
+  margin: 0;
+}

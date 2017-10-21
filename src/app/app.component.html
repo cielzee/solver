@@ -1,0 +1,34 @@
+<div fxLayout="column" fxFlex [class.dark-theme]="isDarkTheme">
+
+  <md-toolbar color="primary">
+    <span>Reddit/aww</span>
+
+    <!-- Filler that pushes the menu button to the end of the toolbar -->
+    <span fxFlex></span>
+  </md-toolbar>
+
+  <md-sidenav-container fxFlex>
+    <md-sidenav #nav mode="side">
+      <md-nav-list>
+        <md-list-item *ngFor="let user of users" (click)="selectedUser = user">
+          <md-icon svgIcon="avatars:{{user.avatar}}" class="avatar"></md-icon>
+          <span>{{user.name}}</span>
+        </md-list-item>
+      </md-nav-list>
+    </md-sidenav>
+    <div class="content" fxLayout="column" fxLayoutGap="16px">
+      <div *ngIf="selectedListing">
+        <button md-raised-button (click)="back()">Back</button>
+        <listing-comments [listing]="selectedListing"></listing-comments>
+      </div>
+      <div *ngIf="listings && !selectedListing" fxLayout="column">
+          <listing-post *ngFor="let listing of listings | paginate: { itemsPerPage: 10, currentPage: p }" [listing]="listing" (viewComments)="viewComments(listing)">{{listing}}</listing-post>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  </md-sidenav-container>
+
+  <md-menu #themeMenu x-position="before">
+    <button md-menu-item (click)="isDarkTheme = !isDarkTheme">Toggle Theme</button>
+  </md-menu>
+</div>
